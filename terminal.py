@@ -1,7 +1,19 @@
+from veiculos import Veiculo
+from oficina import Oficina
+from carro import Carro
+from moto import Moto
+from caminhao import Caminhao
+
+
+
 def main():
 
+    p=[]
+    o=[]
+    c=0
+
     while True:
-        a = str(input("")).split()
+        a = str(input(">")).split()
         cmd = a[0].upper()
 
         if cmd == "AJUDA" and len(a) == 1:
@@ -19,28 +31,120 @@ def main():
             """)
 
         elif cmd == "CADASTRAR":
+
             if len(a) != 7:
                     # Usando a mensagem que você pediu:
                     print("Formato incorreto. Use: CADASTRAR <tipo> <marca> <modelo> <ano> <km> <atrib_especifico>")
                     continue
+            else:
+             
+                if a[1].upper() == "CARRO":
 
-            cadastrar(a) 
+                    c+=1
+                    p.append(Carro(c,a[2],a[3],int(a[4]),float(a[5]),float(a[6])))
+                    print("Registro de Carro:",c)
+
+                if a[1].upper() == "CAMINHAO":
+                     
+                     c+=1
+                     p.append(Caminhao(c,a[2],a[3],int(a[4]),float(a[5]),float(a[6])))
+                     print("Registro de Caminhao:",c)
+
+                if a[1].upper() == "MOTO":
+                     
+                     c+=1
+                     p.append(Moto(c,a[2],a[3],int(a[4]),float(a[5]),float(a[6])))
+                     print("Registro de Moto:",c)
+            
+             
             
         elif cmd == "LISTAR":
-            sistema.listar()
+
+            for x in p :
+
+                x.exibir()
             
         elif cmd == "DETALHES":
+
             if len(a) < 2:
                 print("Formato incorreto. Use: DETALHES <id>")
+
                 continue
-            sistema.detalhes(a[1])
+
+            else:
+
+             for x in p :
+
+                y=x.pega()
+
+                if y["Id"]==int(a[1]):
+                 print(y)
             
         elif cmd == "CUSTO":
+
             if len(a) < 2:
                 print("Formato incorreto. Use: CUSTO <id>")
                 continue
-            sistema.custo(a[1])
             
+            else:
+
+             for x in p :
+
+                y=x.pega()
+
+                if y["Id"]==int(a[1]):
+                 print("Valor de Manutencao:",x.calcular_custo_manutencao())
+
+        elif cmd == "REGISTRAR":
+         
+            if len(a) != 4:
+                # Usando a mensagem que você pediu:
+                print("Formato incorreto. Use: Registrar <ID> <Servico> <Valor>")
+            
+            else:
+                
+                for h in p:
+                
+                    if h.id_existe(int(a[1]))==True:
+                        o.append(Oficina(int(a[1]),a[2],float(a[3])))
+                        print("Registro de servico:",a[1])
+
+
+        elif cmd == "HISTORICO": 
+
+            if len(a) != 2:
+                # Usando a mensagem que você pediu:
+                print("Formato incorreto. Use: Historico <ID> ")
+
+            else:
+                
+                for l in o:
+
+                    r=l.pegaO()
+
+                    if r["Id"]==int(a[1]):
+                        print(r)
+
+        elif cmd == "TOTAL":
+
+            valor=0
+
+            if len(a) != 2:
+                # Usando a mensagem que você pediu:
+                print("Formato incorreto. Use: TOTAL <ID> ")
+
+            else:
+                
+                for l in o:
+
+                    r=l.pegaO()
+
+                    if r["Id"]==int(a[1]):
+                        valor+=r['Valor']
+
+                print("Valor total =",valor)
+
+
         elif cmd == "SAIR":
             break
         else:
