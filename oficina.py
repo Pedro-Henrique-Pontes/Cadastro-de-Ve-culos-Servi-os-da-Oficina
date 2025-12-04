@@ -1,14 +1,8 @@
+
+
 class Oficina:  
 
-    def __init__(self):
-         
-        self.id=id
-        self.Nome = None
-        self.Valor = None
-        self.Historic= []
-
-    
-    def Registrar(self,id,Nome,Valor):
+    def __init__(self,id,Nome,Valor):
 
         if not isinstance(Nome, str) or Nome.strip() == "":
             raise ValueError("Nome inválido: deve ser texto não vazio.")
@@ -25,23 +19,15 @@ class Oficina:
             self.Valor= Valor
 
         self.id=id
-
-        self.Historic.append({
-                    "Id": self.id,
-                    "Servico": self.Nome,
-                    "Valor": self.Valor
-                })
-
-        
-
-    def Historico(self,id):
-        if self.Historic is None:
-                return None
-            
-        for item in self.Historic:
-            if item.get("Id") == id:
-                print(item)
+         
+        self.id=id
+        self.Nome = Nome
+        self.Valor = Valor          
     
+    def pegaO(self):
+
+        return {'Id': self.id, 'Servico': self.Nome, 'Valor': self.Valor}
+
     def Total(self,id):
 
         total_servico=0
@@ -55,18 +41,3 @@ class Oficina:
 
         print("total em serviço:",total_servico)
 
-
-
-p1 = Oficina()
-
-p1.Registrar(1,"manutencao",230)
-p1.Registrar(1,"manutencao",230)
-p1.Registrar(1,"manutencao",230)
-
-p1.Historico(1)
-p1.Total(1)
-
-#{'Id': 1, 'Servico': 'manutencao', 'Valor': 230}
-#{'Id': 1, 'Servico': 'manutencao', 'Valor': 230}
-#{'Id': 1, 'Servico': 'manutencao', 'Valor': 230}
-#total em serviço: 690
