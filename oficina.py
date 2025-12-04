@@ -28,16 +28,6 @@ class Oficina:
 
         return {'Id': self.id, 'Servico': self.Nome, 'Valor': self.Valor}
 
-    def Total(self,id):
 
-        total_servico=0
 
-        if self.Historic is None:
-                return None
-            
-        for item in self.Historic:
-            if item.get("Id") == id:
-                total_servico+=item["Valor"]
-
-        print("total em serviço:",total_servico)
 
