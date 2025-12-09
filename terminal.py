@@ -93,7 +93,7 @@ def main():
                 y=x.pega()
 
                 if y["Id"]==int(a[1]):
-                 print("Valor de Manutencao:",x.calcular_custo_manutencao())
+                 print("Custo Estimado:",x.calcular_custo_manutencao())
 
         elif cmd == "REGISTRAR":
          
@@ -123,7 +123,7 @@ def main():
                     r=l.pegaO()
 
                     if r["Id"]==int(a[1]):
-                        print(r)
+                        print(r["Servico"],":",r["Valor"])
 
         elif cmd == "TOTAL":
 
